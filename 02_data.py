@@ -17,9 +17,28 @@ def get_student_fn(students, index):
 
 students = ['Aparna', 'Anjali', 'Akshay']
 fn = get_student_fn(students, 1)
-print(fn())
-students[1] = 'Anand'
-print(fn())
+
+
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
+a = Point(2, 5)
+b = Point(2, 5)
+a.x = 10
+
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class Point:
+    x: int
+    y: int
+
+a = Point(2, 5)
+b = Point(2, 5)
+print(a == b)
 
 
 
