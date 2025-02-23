@@ -1,36 +1,38 @@
 import random
 from itertools import product, starmap, cycle
 from monads import MultiValue
-from utils import compose2, update_dict, stream_logs
+from utils import compose2, update_dict
 from card_games import Card, Deck, Hand, draw_to_hand
+
+# See the slides and fill in the code
 
 BUST_LIMIT = 22
 
 def new_deck() -> Deck:
-    return list(starmap(Card, product(range(1, 14), "SHDC")))
+    pass
 
 def shuffle(deck: Deck) -> Deck:
-    return random.sample(deck, len(deck))
+    pass
 
 new_shuffled_deck = compose2(new_deck, shuffle)
 
 def get_points_for_card(card: Card):
-    match card.rank:
-        case 10 | 11 | 12 | 13:
-            return MultiValue({10})
-        case 1:
-            return MultiValue({1, 11})
-        case _:
-            return MultiValue({card.rank})
+    # J, Q, K are worth 10 points
+    # A is worth 1 or 11
+    # number cards are worth their rank
+    pass
 
 def get_points(hand: Hand) -> MultiValue:
-    return sum((get_points_for_card(card) for card in hand), MultiValue({0}))
+    # Score of a hand is the sum of scores of all cards
+    pass
 
 def score_hand(hand: Hand):
-    total = get_points(hand)
-    allowed_values = (value for value in total.values if value < BUST_LIMIT)
-    return max(allowed_values)
+    # Take all possible scores of a hand and choose best one
 
+#####
+# This is the code game loop - the imperitive shell that contains all actions
+# In this case any function that uses print or input is an action
+#####
 
 def get_player_action(hand):
     while (action := input('(H)it or (S)tay: ').lower()) not in {'h', 's'}:
